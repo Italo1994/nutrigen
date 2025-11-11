@@ -1,12 +1,14 @@
 
 interface ButtonProps {
     label: string;
+    type?: "submit" | "reset" | "button"
     classes?: string;
+    onClick?: () => void
 }
 
-export function Button({label, classes}: ButtonProps) {
+export function Button({label, type, classes, onClick}: ButtonProps) {
     return (
-        <button className={`${classes}`}>
+        <button type={type} className={`${classes}`} onClick={onClick}>
             {label}
         </button>
     )
