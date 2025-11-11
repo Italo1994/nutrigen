@@ -7,7 +7,7 @@ interface CardProps {
 
 export function Card({ children, classes }: CardProps) {
     return (
-        <div className={`min-w-[15rem] ${classes} min-h-[15rem] p-4`}>
+        <div className={`min-w-[15rem] min-h-[5rem] pl-4 p-2 ${classes}`}>
             {children}
         </div>
     )
