@@ -6,8 +6,11 @@ import { searchFood } from "@/api/connect-fat-secret";
 import axios from "axios";
 
 interface FoodData {
-  food_name: string;
-  food_description: string;
+  name: string;
+  calories: number;
+  carbs: number;
+  fat: number;
+  ingredients: string[]
 }
 
 export function Meal() {
@@ -16,7 +19,7 @@ export function Meal() {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
-    const [foods, setFoods] = useState<string[]>([]);
+    const [foods, setFoods] = useState<FoodData[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
