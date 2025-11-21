@@ -3,6 +3,7 @@ import { Button } from "../Button/Button"
 import { Card, CardDescription, CardHeader, CardTitle } from "../Card/Card"
 import { List } from "../List/List"
 import { searchFood } from "@/api/connect-fat-secret";
+import axios from "axios";
 
 interface FoodData {
   food_name: string;
@@ -21,10 +22,10 @@ export function Meal() {
     useEffect(() => {
         async function fetchFoods() {
         try {
-            const data = await searchFood("arroz"); // 🔹 termo fixo só para teste
-            console.log("data ", data)
-            const results = data?.foods?.food?.map((item: any) => item.food_name) || [];
-            setFoods(results);
+            const response = await searchFood();
+            console.log("data ", response)
+            //const results = data?.foods?.food?.map((item: any) => item.food_name) || [];
+            setFoods(response);
         } catch (err) {
             console.error("Erro ao carregar alimentos:", err);
         } finally {
@@ -34,6 +35,9 @@ export function Meal() {
 
         fetchFoods();
     }, []);
+
+    const meal = foods.map(item => { return item})
+    console.log("meal ", meal)
   
 
     return (
@@ -43,23 +47,30 @@ export function Meal() {
                     something
                 </div>
                 <div className="lg:col-span-2">
-                    <Card classes="w-full">
-                        <CardHeader classes="grid gap-7 pl-2 w-full">
-                            <span className="">{day}/{month}/{year}</span>
-                            <CardTitle classes="w-full">title</CardTitle>
-                            <CardDescription classes="flex gap-15 pr-4 w-full">
-                                <span>350</span>
-                                <span>350</span>
-                                <span>350</span>
-                            </CardDescription>
-                        </CardHeader>
-                    </Card>
+                    {foods.map(item => {
+                        return (
+                            <Card classes="w-full">
+                                <CardHeader classes="grid gap-7 pl-2 w-full">
+                                    <span className="">{day}/{month}/{year}</span>
+                                    <CardTitle classes="w-full">
+                                        {item.name}
+                                    </CardTitle>
+                                    <CardDescription classes="flex gap-15 pr-4 w-full">
+                                        <span>calories: {item.calories}</span>
+                                        <span>carbs: {item.carbs}</span>
+                                        <span>fat: {item.fat}</span>
+                                    </CardDescription>
+                                </CardHeader>
+                            </Card>
+                        )
+                    })[0]}
                 </div>
             </div>
             <div>
-                <List
+                <List 
                     title="ingredients"
-                    items={foods.length ? foods : ["No foods found"]}
+                    items={foods.length ? foods.map(f => f.ingredients)[0] : ["no foods found"]}
+                    
                 />
                 <div className="flex justify-between pr-5 mt-7 md:mt-10 lg:mt-15">
                     <Button label="Substitute..." classes="cursor-pointer font-bold" />

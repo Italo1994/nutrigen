@@ -5,17 +5,19 @@ interface MenuItem {
 }
 
 interface MenuProps {
-    items: MenuItem[]
+    items: MenuItem[];
+    classesContainer?: string;
+    classesItem?: string;
 }
 
-export function Menu({items}: MenuProps) {
+export function Menu({items, classesContainer, classesItem}: MenuProps) {
     return (
         <nav>
-            <ul className="w-full h-[4rem] flex justify-between items-center">
+            <ul className={`w-full h-[4rem] flex justify-between items-center ${classesContainer}`}>
                 {
-                    items.map((item) => {
+                    items.map((item, index) => {
                         return (
-                            <li>
+                            <li key={index} className={`${classesItem}`}>
                                 <a href={item.href}>{item.label}</a>
                             </li>
                         )

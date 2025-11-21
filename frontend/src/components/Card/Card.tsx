@@ -29,9 +29,9 @@ export function CardTitle({ children, classes }: CardProps) {
 
 export function CardDescription({ children, classes }: CardProps) {
     return (
-        <p className={`text-sm ${classes}`}>
+        <div className={`text-sm ${classes}`}>
             {children}
-        </p>
+        </div>
     )
 }
 

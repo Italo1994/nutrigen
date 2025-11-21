@@ -1,4 +1,3 @@
-import { Button } from "@/components/Button/Button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/Card/Card";
 import { Menu } from "@/components/Menu/Menu";
 import { Navbar } from "@/components/Navbar/Navbar";
@@ -7,19 +6,21 @@ import Image from "next/image";
 import nutrigenBanner1 from '../../public/assets/banner1_nutrigen.png';
 
 import { Dna, BarChart3, Utensils } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="w-full min-h-screen">
+    <main className="w-full min-h-screen">
       <main className="">
         <Navbar>
           <a href="#" className="font-bold">NUTRIGEN</a>
           <Menu 
             items={
               [
-                {label: "Log in", href:"#"}
+                {label: "Log in", href:"/login"}
               ]
             }
+            classesItem="text-[#2e7d52]"
           />
         </Navbar>
 
@@ -35,7 +36,7 @@ export default function Home() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button label="Get started" classes="bg-[#009900] p-2 rounded-md md:w-[9rem] text-white font-bold cursor-pointer" />
+                  <Link href="/subscribe" className="bg-[#2e7d52] p-4 rounded-md md:w-[9rem] text-white font-bold cursor-pointer">Get started</Link>
                 </CardContent>
               </Card>
             </div>
@@ -45,7 +46,7 @@ export default function Home() {
         </section>
 
         <section>
-          <div className="flex md:justify-start lg:justify-center items-center sm:pl[3rem] md:pl-[4rem] w-full">
+          <div className="flex md:justify-start lg:justify-center items-center sm:pl[3rem] md:pl-[4rem] w-full mb-10 mt-10">
             <Card>
               <CardHeader>
                 <CardTitle classes="text-[1.6rem] lg:text-[2rem]">
@@ -101,6 +102,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-    </div>
+    </main>
   );
 }
